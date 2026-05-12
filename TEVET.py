@@ -63,7 +63,7 @@ class Player():
 
 Threshold_1 = Level(
 "Threshold Sublevel 1"
-"desc"
+"An infinite labyrinth of sounds and smells. It absolutely reeks here, but you must push on."
 )
 
 Threshold_2 = Level(
@@ -133,7 +133,33 @@ Window = Level(#could entity
 
 
 
-Threshold_1.add_exit("up", Habitble_Zone)#add usage for ladder
+Threshold_1.add_exit("forward", Threshold_2)#add usage for ladder
+
+Threshold_2.add_exit("backward", Threshold_1)
+Threshold_2.add_exit("forward", Threshold_4)
+Threshold_2.add_exit("right", Threshold_3)
+
+Threshold_3.add_exit("left", Threshold_2)
+
+Threshold_4.add_exit("backward", Threshold_2)
+Threshold_4.add_exit("left", Threshold_5)
+
+Threshold_5.add_exit("right", Threshold_4)
+Threshold_5.add_exit("forward", Threshold_8)
+
+Threshold_6.add_exit("forward", Threshold_7)
+
+Threshold_7.add_exit("backward", Threshold_6)
+Threshold_7.add_exit("right", Threshold_8)
+
+Threshold_8.add_exit("left", Threshold_7)
+Threshold_8.add_exit("backward", Threshold_5)
+Threshold_8.add_exit("right", Threshold_9)
+
+Threshold_9.add_exit("left", Threshold_8)
+Threshold_9.add_exit("right", Threshold_10)
+
+Threshold_10.add_exit("left", Threshold_9)
 
 
 almond_water = Item(
