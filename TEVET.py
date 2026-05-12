@@ -1,14 +1,22 @@
+######################################################################################
+#CLASSES
+######################################################################################
 class Description:
     def __init__(self, name, description):
         self.name = name
         self.description = description
 
 class Item(Description):
-    def __init__(self, name, description, hydration, exhaustion, hunger):
+    def __init__(self, name, description, hydration, exhaustion, hunger, special = None):
         super().__init__(name, description)
         self.hydration = hydration
         self.exhaustion = exhaustion
         self.hunger = hunger
+        self.special = special
+    
+    def use_special(self, player):
+        if self.special:
+            self.special(player)
 
 class Level(Description):
     def __init__(self, name, description):
@@ -46,7 +54,7 @@ class Player():
 
     def _drain_status_(self):
         self.hydration -= 5
-        self.exhaustion += 10
+        self.exhaustion += 5
         self.hunger -= 5
         if self.hunger <= 0 or self.exhaustion >= 100 or self.hunger <= 0:
             self.is_alive = False
@@ -61,54 +69,57 @@ class Player():
     def move(self, direction):
         self.location = self.location.exits[direction]
 
+######################################################################################
+#LEVELS
+######################################################################################
 Threshold_1 = Level(
-"Threshold Sublevel 1"
+"Threshold Sublevel 1",
 "An infinite labyrinth of sounds and smells. It absolutely reeks here, but you must push on."
 )
 
 Threshold_2 = Level(
-"Threshold Sublevel 2"
+"Threshold Sublevel 2",
 "desc"
 )
 
 Threshold_3 = Level(
-"Threshold Sublevel 3"
+"Threshold Sublevel 3",
 "desc"
 )
 
 Threshold_4 = Level(
-"Threshold Sublevel 4"
+"Threshold Sublevel 4",
 "desc"
 )
 
 Threshold_5 = Level(
-"Threshold Sublevel 5"
+"Threshold Sublevel 5",
 "desc"
 )
 
 Threshold_6 = Level(
-"Threshold Sublevel 6"
+"Threshold Sublevel 6",
 "A "
 )
 
 Threshold_7 = Level(
-"Threshold Sublevel 7"
+"Threshold Sublevel 7",
 "desc"
 )
 
 Threshold_8 = Level(
-"Threshold Sublevel 8"
+"Threshold Sublevel 8",
 "A window is seen to be on the walls, exposing the darkness outside. A crack can be seen going from corner to corner, maybe it can be broken."
 )
 
 Threshold_9 = Level(
-"Threshold Sublevel 9"
+"Threshold Sublevel 9",
 "desc"
 )
 
 Threshold_10 = Level(#maze
 "Threshold Sublevel 10",
-"desc"
+"A dark room unfolds before you. At first you see nothing. As your eyes adjust you realise the walls close around you. You look up and see a hole, maybe it could be accessed by a ladder"
 )
 
 Habitble_Zone = Level(#safe zone - puzzles
@@ -131,8 +142,9 @@ Window = Level(#could entity
 "Level 188 : The Windows",
 "The trip here has been nothing but exhausting, you just want to sit down and forget about everything, maybe even go home, but alas, you open another door and see that you're still trapped in this nightmare, just in a different scene. You look up to see almost endless hotel rooms, some that are blacked out, and some that have actual activity inside, but no human life. You're in for another wonderful adventure.")
 
-
-
+######################################################################################
+#EXITS
+######################################################################################
 Threshold_1.add_exit("forward", Threshold_2)#add usage for ladder
 
 Threshold_2.add_exit("backward", Threshold_1)
@@ -160,8 +172,21 @@ Threshold_9.add_exit("left", Threshold_8)
 Threshold_9.add_exit("right", Threshold_10)
 
 Threshold_10.add_exit("left", Threshold_9)
+######################################################################################
+#ITEM SPECIAL FUNCTIONS
+######################################################################################
+def Ladder_special(player):
+    if player.location == Threshold_10:
+        Threshold_10.add_exit("up", Habitble_Zone)
+        player.location = Habitble_Zone
+        print("You prop the Ladder up and climb to the next zone.")
+    else:
+        print("You can't use the Ladder here!")
 
 
+######################################################################################
+#ITEMS
+######################################################################################
 almond_water = Item(
 "Almond Water",
 "A fresh bottle of water that has a hint of almond.",
@@ -171,7 +196,7 @@ almond_water = Item(
 cashew_water = Item(#QUESTION, THIS IS A HARMFUL THING, WILL NEGATIVES WORK?)
 "Cashew Water",
 "Reminds you of something familiar, with a hint of cashew.",
-5, -20, 0
+5, 20, 0
 )
 
 marshmallow = Item( #NEXT 2 ITEMS ALSO NEED HELP
@@ -180,50 +205,59 @@ marshmallow = Item( #NEXT 2 ITEMS ALSO NEED HELP
 0, -5, 5
 )
 
-greasy_marshmallow = Item(
+greasy_marshmallow = Item(#special: NA
 "Greasy Marshmallow",
 "How the hell is a marshmallow greasy?",
 -1, 10, 10
 )
 
-candy = Item(
+candy = Item(#special: NA
 "Candy",
 "A sweet treat to fill your teeth.",
 0, 15, 5
 )
 
-stove = Item(#Merging system with almond water to create greasy marshmallow
+stove = Item(#Merging system with almond water to create greasy marshmallow?!?!?
 "Stovepot",
 "A pot with an intense heat, maybe it can be used to cook something?",
 0, 0, 0
 )
 
-key = Item(
+key = Item(#special: for a door i presume?
 "Key",
 "Best you keep this incase locks appear",
 0, 0, 0
 )
 
-ladder = Item(#go from level 0 to 1
+ladder = Item(#special: go from level 0 to 1 if threshold_1 == p1.location
 "Ladder",
 "Its a ladder",
-0, 0, 0
+0, 0, 0,
+Ladder_special
 )
 
-hammer = Item(
+hammer = Item(#special: break window????
 "Hammer",
 "Seems like it can be used to break something",
 0, 0, 0
 )
-
+######################################################################################
+#ADDING ITEMS
+######################################################################################
+#Threshold
 Threshold_6.add_item(ladder)
-Threshold_3.add_item(marshmallow)
+Threshold_8.add_item(marshmallow)
+Threshold_3.add_item(almond_water)
+Threshold_5.add_item(candy)
+
 Habitble_Zone.add_item(cashew_water)
-Office.add_item(almond_water)
+
 Sublimity.add_item(hammer)
 
 
-
+######################################################################################
+#MAIN PROGRAM
+######################################################################################
 if __name__ == "__main__":
 
     playername = input("What is your name?")
@@ -285,14 +319,13 @@ Don't wander too long. Don't make noise. Don't look behind you.
             
             if found_item:
                 p1.use(found_item)
-                # If it's a ladder or hammer, you might not want to remove it
-                if found_item.name not in ["Ladder", "Hammer", "Stovepot"]:
-                    p1.inventory.remove(found_item)
+                found_item.use_special(p1)
+                p1.inventory.remove(found_item)
             else:
                 print(f"You aren't carrying '{target}'.")
 
         elif action == "check":
-            if len(choice) > 1 and choice[1:] == "inv" or choice[1:] == "inventory":
+            if len(choice) > 1 and choice[1] in ("inv", "inventory"):
                 if p1.inventory:
                     print("\n--- Inventory ---")
                     for item in p1.inventory:
