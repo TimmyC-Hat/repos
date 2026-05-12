@@ -61,10 +61,6 @@ class Player():
     def move(self, direction):
         self.location = self.location.exits[direction]
 
-Threshold = Level(#maze
-"Level 0 : Threshold",
-"An infinite labyrinth of sounds and smells. It absolutely reeks here, but you must push on.")
-
 Threshold_1 = Level(
 "Threshold Sublevel 1"
 "desc"
@@ -110,6 +106,11 @@ Threshold_9 = Level(
 "desc"
 )
 
+Threshold_10 = Level(#maze
+"Threshold Sublevel 10",
+"desc"
+)
+
 Habitble_Zone = Level(#safe zone - puzzles
 "Level 1 : Habitable Zone",
 "You feel this place is somewhat safe. Best not to wander off to the dark parts, though, you hear ominous sounds in the unforseen.")
@@ -132,13 +133,7 @@ Window = Level(#could entity
 
 
 
-Threshold.add_exit("up", Habitble_Zone)#add usage for ladder
-Habitble_Zone.add_exit("down", Threshold)
-Threshold.add_exit("left", Office)
-Office.add_exit("down", Level_FUN)
-Level_FUN.add_exit("up", Office)
-Sublimity.add_exit("forward", Window)#break a window with hammer
-Window.add_exit("backward", Sublimity)
+Threshold_1.add_exit("up", Habitble_Zone)#add usage for ladder
 
 
 almond_water = Item(
@@ -195,8 +190,8 @@ hammer = Item(
 0, 0, 0
 )
 
-Threshold.add_item(ladder)
-Threshold.add_item(marshmallow)
+Threshold_6.add_item(ladder)
+Threshold_3.add_item(marshmallow)
 Habitble_Zone.add_item(cashew_water)
 Office.add_item(almond_water)
 Sublimity.add_item(hammer)
@@ -206,7 +201,7 @@ Sublimity.add_item(hammer)
 if __name__ == "__main__":
 
     playername = input("What is your name?")
-    p1 = Player(playername, Threshold)
+    p1 = Player(playername, Threshold_1)
 
     print("""
 THE BACKROOMS - A Text Adventure

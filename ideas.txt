@@ -3,15 +3,15 @@ Backrooms puzzle game.
 
 _____________________________________________________
 Location:                                  SCORE: 000 
-Level 0: The lobby
-Level RUN FOR YOUR LIFE
-Level 26: Level Fun
-Poolrooms
+Level 0: Threshold
+Level RUN FOR YOUR LIFE (!)
+Level Fun
+Level 37: Sublimity
 
 Descriptions:
 
 
-Puzzles:#per puzzle completed
+Puzzles:#per puzzle completed (WIP)
 Pipe (left right)
 Tripmine (mini maze)
 Locked Areas (needs key)
@@ -24,9 +24,7 @@ Bottle (restores hydration)
 Key
 Ladder (Level 0)
 
-
-________
-|_
+_____________________________________________________
 
 Level 0: The lobby
 Before you is an expansive non-Euclidean space resembling 
