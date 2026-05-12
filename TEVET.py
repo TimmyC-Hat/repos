@@ -88,7 +88,7 @@ Threshold_5 = Level(
 
 Threshold_6 = Level(
 "Threshold Sublevel 6"
-"desc"
+"A "
 )
 
 Threshold_7 = Level(
@@ -98,7 +98,7 @@ Threshold_7 = Level(
 
 Threshold_8 = Level(
 "Threshold Sublevel 8"
-"desc"
+"A window is seen to be on the walls, exposing the darkness outside. A crack can be seen going from corner to corner, maybe it can be broken."
 )
 
 Threshold_9 = Level(
@@ -240,7 +240,7 @@ Don't wander too long. Don't make noise. Don't look behind you.
         p1.location.describe()
         print(f"[ Stats - Hunger: {p1.hunger} | Hydration: {p1.hydration} | Exhaustion: {p1.exhaustion} ]")
         
-        choice = input("\nWhat will you do? (move [direction]/ take [item] / use [item] / check [inv/room] / quit): ").lower().split()
+        choice = input("\nWhat will you do? (move [direction]/ quit): ").lower().split()
         
         if not choice:
             continue
