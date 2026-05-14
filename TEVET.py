@@ -79,7 +79,7 @@ Threshold_1 = Level(
 
 Threshold_2 = Level(
 "Threshold Sublevel 2",
-"You wander aimlessly towards the only exit/entry you can find. More rooms can be seen further on. The exit doesn't seem that long from here."
+"You wander aimlessly towards the only exit/entry you can find. More rooms can be seen further on and to the right. The exit doesn't seem that long from here."
 )
 
 Threshold_3 = Level(
@@ -89,12 +89,12 @@ Threshold_3 = Level(
 
 Threshold_4 = Level(
 "Threshold Sublevel 4",
-"desc"
+"A narrow corridor opens into a chamber of strange tapestries and a window into another room infront of you and a door to the left. The air feels heavier here and you can tell the way back is not the only path."
 )
 
 Threshold_5 = Level(
 "Threshold Sublevel 5",
-"desc"
+"The walls here hum softly and old door frames stand unused. It feels like a place where one must choose carefully between the onward path and the safer return."
 )
 
 Threshold_6 = Level(
@@ -104,7 +104,7 @@ Threshold_6 = Level(
 
 Threshold_7 = Level(
 "Threshold Sublevel 7",
-"desc"
+"A faint glow leaks through a crack in the ceiling. The walls are damp, and the path backward seems less certain than the right-hand route ahead."
 )
 
 Threshold_8 = Level(
@@ -114,7 +114,7 @@ Threshold_8 = Level(
 
 Threshold_9 = Level(
 "Threshold Sublevel 9",
-"desc"
+"This passage narrows into a tight space, the air growing colder. Ahead is another turn, and behind you is the room that led you here."
 )
 
 Threshold_10 = Level(#maze
