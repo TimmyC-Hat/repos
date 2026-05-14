@@ -79,12 +79,12 @@ Threshold_1 = Level(
 
 Threshold_2 = Level(
 "Threshold Sublevel 2",
-"desc"
+"You wander aimlessly towards the only exit/entry you can find. More rooms can be seen further on. The exit doesn't seem that long from here."
 )
 
 Threshold_3 = Level(
 "Threshold Sublevel 3",
-"desc"
+"You continue on. What is with the monotone humming, you wonder. If only you can CHECK."
 )
 
 Threshold_4 = Level(
@@ -99,7 +99,7 @@ Threshold_5 = Level(
 
 Threshold_6 = Level(
 "Threshold Sublevel 6",
-"A "
+"Entering the oncoming rooms has stung your eyes, you take a short break and spot a ladder propped up against the wall. Perhaps there is a way to TAKE it."
 )
 
 Threshold_7 = Level(
@@ -119,7 +119,7 @@ Threshold_9 = Level(
 
 Threshold_10 = Level(#maze
 "Threshold Sublevel 10",
-"A dark room unfolds before you. At first you see nothing. As your eyes adjust you realise the walls close around you. You look up and see a hole, maybe it could be accessed by a ladder"
+"A dark room unfolds before you. At first you see nothing. As your eyes adjust you realise the walls close around you. You look up and see a hole, maybe it could be accessed by a ladder."
 )
 
 Habitble_Zone = Level(#safe zone - puzzles
@@ -145,7 +145,7 @@ Window = Level(#could entity
 ######################################################################################
 #EXITS
 ######################################################################################
-Threshold_1.add_exit("forward", Threshold_2)#add usage for ladder
+Threshold_1.add_exit("forward", Threshold_2)
 
 Threshold_2.add_exit("backward", Threshold_1)
 Threshold_2.add_exit("forward", Threshold_4)
@@ -172,6 +172,7 @@ Threshold_9.add_exit("left", Threshold_8)
 Threshold_9.add_exit("right", Threshold_10)
 
 Threshold_10.add_exit("left", Threshold_9)
+
 ######################################################################################
 #ITEM SPECIAL FUNCTIONS
 ######################################################################################
@@ -241,14 +242,14 @@ hammer = Item(#special: break window????
 "Seems like it can be used to break something",
 0, 0, 0
 )
+
 ######################################################################################
 #ADDING ITEMS
 ######################################################################################
-#Threshold
-Threshold_6.add_item(ladder)
-Threshold_8.add_item(marshmallow)
 Threshold_3.add_item(almond_water)
 Threshold_5.add_item(candy)
+Threshold_6.add_item(ladder)
+Threshold_8.add_item(marshmallow)
 
 Habitble_Zone.add_item(cashew_water)
 
@@ -260,7 +261,7 @@ Sublimity.add_item(hammer)
 ######################################################################################
 if __name__ == "__main__":
 
-    playername = input("What is your name?")
+    playername = input("What is your name? ")
     p1 = Player(playername, Threshold_1)
 
     print("""
