@@ -42,6 +42,17 @@ class Puzzle(Description):
     def puzzle1_maze(self):
         pass
 
+class Riddle(Description):
+    def __init__(self, name, description, question, answer):
+        super().__init__(name, description)
+        self.question = question
+        self.answer = answer.lower()
+
+    def ask_riddle(self):
+        print(f"\n{self.description}\n{self.question}")
+        user_answer = input("Your answer: ").lower().strip()
+        return user_answer == self.answer
+
 class Player():
     def __init__(self, name, location: Level):
         self.name = name
@@ -74,12 +85,12 @@ class Player():
 ######################################################################################
 Threshold_1 = Level(
 "Threshold Sublevel 1",
-"An infinite labyrinth of sounds and smells. It absolutely reeks here, but you must push on."
+"An infinite labyrinth of sounds and smells. It absolutely reeks here, but you must go FORWARD."
 )
 
 Threshold_2 = Level(
 "Threshold Sublevel 2",
-"You wander aimlessly towards the only exit/entry you can find. More rooms can be seen further on and to the right. The exit doesn't seem that long from here."
+"You wander aimlessly towards the only exit/entry you can find. More rooms can be seen further on and to the RIGHT. You could always go BACKWARD but the exit doesn't seem that long from here."
 )
 
 Threshold_3 = Level(
@@ -89,7 +100,7 @@ Threshold_3 = Level(
 
 Threshold_4 = Level(
 "Threshold Sublevel 4",
-"A narrow corridor opens into a chamber of strange tapestries and a window into another room infront of you and a door to the left. The air feels heavier here and you can tell the way back is not the only path."
+"A narrow corridor opens into a chamber of strange tapestries and a window into another room infront of you and a door to the LEFT. The air feels heavier here and you can tell the way back is not the only path."
 )
 
 Threshold_5 = Level(
@@ -126,24 +137,62 @@ Habitble_Zone = Level(#safe zone - puzzles
 "Level 1 : Habitable Zone",
 "You feel this place is somewhat safe. Best not to wander off to the dark parts, though, you hear ominous sounds in the unforseen.")
 
-Office = Level(#'harder' puzzles
-"Level 4 : Abandoned Office",
-"An infinite and empty office. It's a bit creepy here but nothing to worry about.")
+Habitable_1 = Level(
+"Habitable Sublevel 1",
+"A serene area with soft lighting. Paths lead in multiple directions, but you sense safety here."
+)
 
-Level_FUN = Level(#mainline entity
-"Level FUN =)",
-"This place is awful, the music here sucks and the cake is stale. You swear you hear children having fun, but you're probably going crazy.")
+Habitable_2 = Level(
+"Habitable Sublevel 2",
+"The air is fresh, and you can hear distant echoes. Forward seems inviting."
+)
 
-Sublimity = Level(#meant to be a break - puzzle to find a fire exit hammer
-"Level 37 : Sublimity",
-"After such a journey, you're on edge, you can barely even sit down without feeling like something is right behind you, but seeing the water around you and the extra bottles of almond water make you feel relief.")
+Habitable_3 = Level(
+"Habitable Sublevel 3",
+"Comfortable surroundings with subtle hums. You can go left or right."
+)
 
-Window = Level(#could entity
-"Level 188 : The Windows",
-"The trip here has been nothing but exhausting, you just want to sit down and forget about everything, maybe even go home, but alas, you open another door and see that you're still trapped in this nightmare, just in a different scene. You look up to see almost endless hotel rooms, some that are blacked out, and some that have actual activity inside, but no human life. You're in for another wonderful adventure.")
+Habitable_4 = Level(
+"Habitable Sublevel 4",
+"A quiet chamber. The way ahead feels promising."
+)
 
+Habitable_5 = Level(
+"Habitable Sublevel 5",
+"You notice an inscription on the left wall. Perhaps you can READ it."
+)
+
+Habitable_6 = Level(
+"Habitable Sublevel 6",
+"Continuing through the safe zones. The path branches."
+)
+
+Habitable_7 = Level(
+"Habitable Sublevel 7",
+"A restful spot with gentle breezes."
+)
+
+Habitable_8 = Level(
+"Habitable Sublevel 8",
+"The environment feels stable. Forward or backward?"
+)
+
+Habitable_9 = Level(
+"Habitable Sublevel 9",
+"Nearing the end of this zone. A sense of accomplishment."
+)
+
+Habitable_10 = Level(
+"Habitable Sublevel 10",
+"The final sublevel. Another inscription awaits on the left."
+)
+
+Final_Level = Level(
+"Escape Point",
+"You have reached the end of the Habitable Zone. Freedom awaits!"
+)
 ######################################################################################
-#EXITS
+#Threshold EXITS
 ######################################################################################
 Threshold_1.add_exit("forward", Threshold_2)
 
@@ -174,6 +223,44 @@ Threshold_9.add_exit("right", Threshold_10)
 Threshold_10.add_exit("left", Threshold_9)
 
 ######################################################################################
+#HABITABLE ZONE EXITS
+######################################################################################
+Habitble_Zone.add_exit("forward", Habitable_1)
+
+Habitable_1.add_exit("backward", Habitble_Zone)
+Habitable_1.add_exit("right", Habitable_2)
+Habitable_1.add_exit("left", Habitable_4)
+
+Habitable_2.add_exit("right", Habitable_3)
+Habitable_2.add_exit("left", Habitable_1)
+
+
+Habitable_3.add_exit("left", Habitable_2)
+
+Habitable_4.add_exit("right", Habitable_1)
+Habitable_4.add_exit("left", Habitable_5)
+
+Habitable_5.add_exit("right", Habitable_4)
+# Forward exit will be added after riddle
+
+Habitable_6.add_exit("backward", Habitable_5)
+Habitable_6.add_exit("forward", Habitable_7)
+
+Habitable_7.add_exit("backward", Habitable_6)
+Habitable_7.add_exit("right", Habitable_8)
+
+Habitable_8.add_exit("left", Habitable_7)
+Habitable_8.add_exit("right", Habitable_9)
+
+Habitable_9.add_exit("left", Habitable_8)
+Habitable_9.add_exit("right", Habitable_10)
+
+Habitable_10.add_exit("left", Habitable_9)
+# Forward exit will be added after riddle
+
+Final_Level.add_exit("backward", Habitable_10)
+
+######################################################################################
 #ITEM SPECIAL FUNCTIONS
 ######################################################################################
 def Ladder_special(player):
@@ -197,22 +284,22 @@ almond_water = Item(
 cashew_water = Item(#QUESTION, THIS IS A HARMFUL THING, WILL NEGATIVES WORK?)
 "Cashew Water",
 "Reminds you of something familiar, with a hint of cashew.",
-5, 20, 0
+10, 20, 0
 )
 
 marshmallow = Item( #NEXT 2 ITEMS ALSO NEED HELP
 "Marshmallow",
 "A soft and squishy cylinder, looks tasty. Also creates a huge mess on your hands, reminder to wash it.",
-0, -5, 5
+5, 5, 10
 )
 
-greasy_marshmallow = Item(#special: NA
+greasy_marshmallow = Item( #special: NA
 "Greasy Marshmallow",
 "How the hell is a marshmallow greasy?",
 -1, 10, 10
 )
 
-candy = Item(#special: NA
+candy = Item(
 "Candy",
 "A sweet treat to fill your teeth.",
 0, 15, 5
@@ -249,11 +336,29 @@ hammer = Item(#special: break window????
 Threshold_3.add_item(almond_water)
 Threshold_5.add_item(candy)
 Threshold_6.add_item(ladder)
-Threshold_8.add_item(marshmallow)
+Threshold_9.add_item(marshmallow)
 
 Habitble_Zone.add_item(cashew_water)
+Habitable_3.add_item(candy)
+Habitable_7.add_item(marshmallow)
+Habitable_10.add_item(candy)
 
-Sublimity.add_item(hammer)
+######################################################################################
+#RIDDLES
+######################################################################################
+riddle_5 = Riddle(
+"Wall Inscription",
+"An ancient riddle etched into the wall.",
+"What has keys but can't open locks?",
+"piano"
+)
+
+riddle_10 = Riddle(
+"Glowing Text",
+"A mysterious glowing inscription.",
+"What comes once in a minute, twice in a moment, but never in a thousand years?",
+"m"
+)
 
 
 ######################################################################################
@@ -274,6 +379,10 @@ Don't wander too long. Don't make noise. Don't look behind you.
     while p1.is_alive:
         p1.location.describe()
         print(f"[ Stats - Hunger: {p1.hunger} | Hydration: {p1.hydration} | Exhaustion: {p1.exhaustion} ]")
+        
+        if p1.location == Final_Level:
+            print("\nCongratulations! You have escaped the Backrooms!")
+            break
         
         choice = input("\nWhat will you do? (move [direction]/ quit): ").lower().split()
         
@@ -337,6 +446,22 @@ Don't wander too long. Don't make noise. Don't look behind you.
                     print(f"- {i.name}")
             else:
                 print("\nYour pockets are empty.")
+        
+        elif action == "read":
+            if target == "left" and p1.location == Habitable_5:
+                if riddle_5.ask_riddle():
+                    print("Correct! A path forward opens.")
+                    Habitable_5.add_exit("forward", Habitable_6)
+                else:
+                    print("Incorrect. Try again.")
+            elif target == "left" and p1.location == Habitable_10:
+                if riddle_10.ask_riddle():
+                    print("Correct! A path forward opens.")
+                    Habitable_10.add_exit("forward", Final_Level)
+                else:
+                    print("Incorrect. Try again.")
+            else:
+                print("Nothing to read here.")
        
         elif action == "quit":
             print("You gave up on finding the exit...")
@@ -447,7 +572,7 @@ Don't wander too long. Don't make noise. Don't look behind you.
 
 '''print("""
 Credits:
-    Vedh Sudhesh 11SEN1
+    Vedh Sudhesh 1COMP1
     Timmy Cheung 11SEN1
     Eden Li 11SEN1
     Gambler Timmy Friend
